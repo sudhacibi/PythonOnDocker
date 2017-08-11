@@ -1,0 +1,25 @@
+conn:
+ connHost: 192.168.99.100
+ connPort : 5671
+ connUseSSL : true
+ connSocketTimeout : 8
+ connVHost : CorrespondenceEngine
+ connUsername : guest
+ connPassword : guest
+ connPrefetchCount : 1
+queues:
+ - {name: HA-CorrespondenceFulfillment,
+    durable: true,
+    exclusive: false,
+    auto_delete: false,
+    arguments: {x-max-priority: 250}}
+ - {name: HA-CorrespondenceFulfillment-Delay120s, 
+    durable: true,
+    exclusive: false,
+    auto_delete: false,
+    arguments: {x-message-ttl: 120000, x-dead-letter-exchange: "", x-dead-letter-routing-key: HA-CorrespondenceFulfillment}}
+ - {name: HA-CorrespondenceFulfillment-Delay30s,
+    durable: true,
+    exclusive: false,
+    auto_delete: false,
+    arguments: {x-message-ttl: 30000, x-dead-letter-exchange: "", x-dead-letter-routing-key: HA-CorrespondenceFulfillment}}

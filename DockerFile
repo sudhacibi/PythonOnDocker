@@ -1,0 +1,6 @@
+FROM python:3
+ADD CreateRabbitQueues.py /
+ADD rabbitCorrespondenseEngine.yml /
+RUN pip install pika
+RUN pip install PyYAML
+CMD ["python CreateRabbitQueues.py rabbitCorrespondenseEngine.yml"]
